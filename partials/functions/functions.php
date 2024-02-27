@@ -6,8 +6,7 @@ function passwordGenerator( $passwordLength, $repeatbool, $letterbool, $numberbo
    $specialchar = '!"#$%&()*+,-./:;<=>?@[\]^_`{|}~';
    $char;
 
-//    based on the boolean values of letters, number and special characters, the variable $char will be filled with the proper values
-
+    //based on the boolean values of letters, number and special characters, the variable $char will be filled with the proper values
    if($letterbool && $numberbool && $specialcharbool){
     $char = $letters . $numbers . $specialchar;
    }else{

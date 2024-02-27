@@ -40,8 +40,11 @@ session_start();
         
         <!-- only visible if there is a password in the session -->
         <?php if(isset( $_SESSION["password"] )): ?>
-            <div class="my-max-w bg-body-tertiary rounded-2 mt-3 p-3 overflow-auto ">
+            <div class="my-max-w bg-body-tertiary rounded-2 mt-3 p-3 overflow-auto">
                 <?= $_SESSION["password"]; ?>
+                <form action="index.php" class="float-end">
+                    <button type="submit" class="btn btn-sm btn-secondary">Torna indietro</button>
+                </form>
             </div>
         <?php endif; ?>
 

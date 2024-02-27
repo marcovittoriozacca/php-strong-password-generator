@@ -2,10 +2,14 @@
 session_start();
 require_once __DIR__ . "/partials/functions/functions.php";
 
+$err = false;
+
 if(isset( $_GET['length'] ) && $_GET['length'] != '' ){
     if(isset($_GET['letters']) || isset($_GET['numbers']) || isset($_GET['specialchar'])){
         $_SESSION['password'] = passwordGenerator( $_GET['length'], $_GET['repetition'], $_GET['letters'], $_GET['numbers'], $_GET['specialchar']  );
         header("Location: password.php");
+    }else{
+        $err = true;
     }
 }
 
@@ -31,13 +35,21 @@ if(isset( $_GET['length'] ) && $_GET['length'] != '' ){
         <h2>Genera una password sicura</h2>
     </header>
     <main>
+        <?php if($err): ?>
+            <div class="alert alert-danger my-max-w mb-3" role="alert">
+                <h5>Inserisci almeno un valore per ogni campo!</h5>
+            </div>
+        <?php endif; ?>
+
         <form action="index.php" method="GET" class="my-max-w p-3 bg-body-tertiary rounded-2">
+
+
             <div class="row align-items-center row-gap-3">
                 <div class="col-6">
                     <label for="length" class="form-label">Lunghezza password:</label>
                 </div>
                 <div class="col-6">
-                    <input type="number" min="1" max="15" class="form-control" name="length" id="length">
+                    <input required type="number" min="1" max="15" class="form-control" name="length" id="length">
                 </div>
                 <div class="col-6">
                     <label class="form-label">Consenti ripetizioni di uno o più caratteri:</label>
