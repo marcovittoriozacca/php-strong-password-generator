@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . "/partials/functions/functions.php";
 
 if(isset( $_GET['length'] ) && $_GET['length'] != '' ){
-    $_SESSION['password'] = passwordGenerator( $_GET['length']);
+    $_SESSION['password'] = passwordGenerator( $_GET['length'], $_GET['repetition']);
     header("Location: password.php");
 }
 
@@ -30,15 +30,28 @@ if(isset( $_GET['length'] ) && $_GET['length'] != '' ){
     </header>
     <main>
         <form action="index.php" method="GET" class="my-max-w p-3 bg-body-tertiary rounded-2">
-            <div class="row align-items-center">
+            <div class="row align-items-center row-gap-3">
                 <div class="col-6">
                     <label for="length" class="form-label">Lunghezza password:</label>
                 </div>
                 <div class="col-6">
-                    <input type="number" min="1" class="form-control" name="length" id="length">
+                    <input type="number" min="1" max="15" class="form-control" name="length" id="length">
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Consenti ripetizioni di uno o più caratteri:</label>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <input checked type="radio" name="repetition" id="repetition-yes" value="true">
+                        <label for="repetition-yes" class="form-label">Si</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="repetition" id="repetition-no" value="false">
+                        <label for="repetition-no" class="form-label">No</label>
+                    </div>
                 </div>
                 <div class="col-12">
-                    <div class="mt-2">
+                    <div>
                         <button type="submit" class="btn btn-secondary">Genera</button>
                     </div>
                 </div>
