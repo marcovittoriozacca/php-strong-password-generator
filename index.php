@@ -3,8 +3,10 @@ session_start();
 require_once __DIR__ . "/partials/functions/functions.php";
 
 if(isset( $_GET['length'] ) && $_GET['length'] != '' ){
-    $_SESSION['password'] = passwordGenerator( $_GET['length'], $_GET['repetition']);
-    header("Location: password.php");
+    if(isset($_GET['letters']) || isset($_GET['numbers']) || isset($_GET['specialchar'])){
+        $_SESSION['password'] = passwordGenerator( $_GET['length'], $_GET['repetition'], $_GET['letters'], $_GET['numbers'], $_GET['specialchar']  );
+        header("Location: password.php");
+    }
 }
 
 ?>
@@ -50,6 +52,21 @@ if(isset( $_GET['length'] ) && $_GET['length'] != '' ){
                         <label for="repetition-no" class="form-label">No</label>
                     </div>
                 </div>
+                <div class="col-6 offset-6">
+                    <div>
+                        <input type="checkbox" name="letters" id="letters" value="true">
+                        <label for="letters" class="form-label">Lettere</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="numbers" id="numbers" value="true">
+                        <label for="numbers" class="form-label">Numeri</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="specialchar" id="specialchar" value="true">
+                        <label for="specialchar" class="form-label">Simboli</label>
+                    </div>
+                </div>
+
                 <div class="col-12">
                     <div>
                         <button type="submit" class="btn btn-secondary">Genera</button>
